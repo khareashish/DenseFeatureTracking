@@ -181,7 +181,6 @@
 								</option>
 								<option id="xilinx.gnu.c.link.option.ldflags.961965182" name="Linker Flags" superClass="xilinx.gnu.c.link.option.ldflags" value=" --sysroot=${SYSROOT} -Wl,-rpath-link=${SYSROOT}/lib,-rpath-link=${SYSROOT}/usr/lib -sdcard ../src/data" valueType="string"/>
 								<option id="xilinx.gnu.c.link.option.libs.1455845650" name="Libraries (-l)" superClass="xilinx.gnu.c.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="video"/>
 									<listOptionValue builtIn="false" value="opencv_videoio"/>
 									<listOptionValue builtIn="false" value="glib-2.0"/>
 									<listOptionValue builtIn="false" value="drm"/>
