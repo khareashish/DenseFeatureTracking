@@ -1,16 +1,17 @@
 #include "xf_headers.h"
 #include "string.h"
 #include "DFTParameters.hpp"
-
-#include "ComputeGradients.hpp"
 #include "ComputeResponse.hpp"
+#include "NonMaxSupression.hpp"
+
 int main()
 {
 
 
 	Pixel_t *pSrcImage 	= (Pixel_t*)sds_alloc(HEIGHT*WIDTH*sizeof(Pixel_t) ) ;
-	Grad_t 	*pGrad 		= (Grad_t*)sds_alloc(HEIGHT*WIDTH*sizeof(Grad_t) ) 	;
 	Fixed_t	*pResponse	= (Fixed_t*)sds_alloc(HEIGHT*WIDTH*sizeof(Fixed_t))	;
+
+	Pixel_t *pKeypointImage = (Pixel_t*)sds_alloc(HEIGHT*WIDTH*sizeof(Pixel_t) ) ;
 
 	printf("Reading image..\n");
 
@@ -22,21 +23,22 @@ int main()
 		pSrcImage[i] = *(mSrcImage.data+i);
 	}
 
-	printf("computing gradients..\n");
+	printf("Processing Image in hardware ..\n");
 
 
 	unsigned long clock_start, clock_end;
 	clock_start = sds_clock_counter();
 
+
 #pragma SDS async(1)
-	compute_gradients(pSrcImage, pGrad);
+	compute_response(pSrcImage, pResponse);
 #pragma SDS async(2)
-	compute_response(pGrad, pResponse );
+	non_max_suppresion(pResponse, pKeypointImage);
+
 #pragma SDS wait(1)
 #pragma SDS wait(2)
-
 	clock_end = sds_clock_counter();
-	printf("Time to compute Gradients = %f ms \n", (1000.0/sds_clock_frequency())*(double)(clock_end-clock_start));
+	printf("Time to Process = %f ms \n", (1000.0/sds_clock_frequency())*(double)(clock_end-clock_start));
 
 
 	printf("Writing gradients to file..\n");
@@ -47,17 +49,32 @@ int main()
 	mGradY.create(HEIGHT, WIDTH, CV_32S);
 	mResponse.create(HEIGHT, WIDTH, CV_32F);
 
+	std::vector<cv::KeyPoint> keypoints_out;
+
 	for(int iRow =  0; iRow < HEIGHT ; iRow++)
 	{
 		for(int iCol = 0 ; iCol < WIDTH; iCol++ )
 		{
-			mGradX.at<int>(iRow, iCol) =  (int)(pGrad[iRow*WIDTH + iCol].dIdx);
-			mGradY.at<int>(iRow, iCol) =  (int)(pGrad[iRow*WIDTH + iCol].dIdy);
 
 			mResponse.at<float>(iRow, iCol) =  (float)(pResponse[iRow*WIDTH + iCol]);
 
+
+			cv::KeyPoint KP;
+
+			if(pKeypointImage[iRow*WIDTH+ iCol] !=0 )
+			{
+				KP.pt.x = iCol;
+				KP.pt.y = iRow;
+				keypoints_out.push_back(KP);
+			}
 		}
 	}
+
+
+
+	cv::Mat KPImage;
+	cv::drawKeypoints(mSrcImage, keypoints_out, KPImage, cv::Scalar(1, 1, 255));
+	imwrite("ShiTomasiKeypoints.jpg", KPImage);
 
 
 	cv::FileStorage fs;

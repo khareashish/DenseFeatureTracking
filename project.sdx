@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="ASCII"?>
 <sdsproject:SDSProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdsproject="http://www.xilinx.com/sdsproject" name="DenseFeatureTracker" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker" platform="C:\Xilinx\SDx\2018.2\platforms\zcu102-es2-rv-ss-2018-2\zcu102_es2_rv_ss\zcu102_es2_rv_ss.xpfm" platformUID="xilinx:zcu102:zcu102_es2_rv_ss:1.0(custom)" systemProject="DenseFeatureTracker_system" sysConfig="a53_linux" runtime="C/C++" cpu="a53_linux" cpuInstance="" os="linux" ConfigType="Debug">
-  <configuration name="Debug" id="com.xilinx.sdsoc.managedbuild.project.debug.33338089">
+  <configuration name="Debug" id="com.xilinx.sdsoc.managedbuild.project.debug.33338089" dirty="true">
     <configBuildOptions xsi:type="sdsproject:Option" insertapm="false" gensdcard="true" dmclkid="2" enableHwSwTrace="false" traceApplication="false">
       <accelerator name="compute_response" filepath="src/ComputeResponse.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/ComputeResponse.cpp"/>
       <accelerator name="compute_gradients" filepath="src/ComputeGradients.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/ComputeGradients.cpp"/>
+      <accelerator name="non_max_suppresion" filepath="src/NonMaxSuppression.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/NonMaxSuppression.cpp"/>
     </configBuildOptions>
     <lastBuildOptions xsi:type="sdsproject:Option" insertapm="false" gensdcard="true" dmclkid="2" enableHwSwTrace="false" traceApplication="false">
       <accelerator name="compute_response" filepath="src/ComputeResponse.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/ComputeResponse.cpp"/>
       <accelerator name="compute_gradients" filepath="src/ComputeGradients.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/ComputeGradients.cpp"/>
+      <accelerator name="non_max_suppresion" filepath="src/NonMaxSuppression.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/NonMaxSuppression.cpp"/>
     </lastBuildOptions>
   </configuration>
   <configuration name="Release" id="com.xilinx.sdsoc.managedbuild.project.release.2025939474">
     <configBuildOptions xsi:type="sdsproject:Option" insertapm="false" gensdcard="true" dmclkid="2" enableHwSwTrace="false" traceApplication="false">
       <accelerator name="compute_response" filepath="src/ComputeResponse.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/ComputeResponse.cpp"/>
+      <accelerator name="non_max_suppresion" filepath="src/NonMaxSuppression.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/NonMaxSuppression.cpp"/>
     </configBuildOptions>
     <lastBuildOptions xsi:type="sdsproject:Option" insertapm="false" gensdcard="true" dmclkid="2" enableHwSwTrace="false" traceApplication="false">
       <accelerator name="compute_response" filepath="src/ComputeResponse.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/ComputeResponse.cpp"/>
+      <accelerator name="non_max_suppresion" filepath="src/NonMaxSuppression.cpp" clkid="2" location="D:/GITHUB/SDSoC_Sandbox/DenseFeatureTracker/src/NonMaxSuppression.cpp"/>
     </lastBuildOptions>
   </configuration>
 </sdsproject:SDSProject>
